@@ -29,12 +29,31 @@ class LinkedList:
         :param data: integer data that will be used to create a node
         """
         # Write code here
+        if self.head==None:
+            self.head=Node(data)
+        else:
+            current=self.head
+            while(current.next):
+                current=current.next
+            current.next=Node(data)
+
 
     def status(self):
         """
         It prints all the elements of list.
         """
         # write code here
+        self.l=[]
+        curr=self.head
+        #self.l.append(curr.data)
+        #print(curr.data,"(((((")
+        while(curr):
+            self.l.append(curr.data)
+        #    print(curr.data, "(((((((")
+            curr=curr.next
+        print(self.l)
+
+
 
 
 class Solution:
@@ -48,10 +67,86 @@ class Solution:
         :return: returns the sum as a linked list
         """
         # Write code here
-        
-        
+        cur=first_list.head
+        a=1
+        while(cur.next):
+            cur=cur.next
+            a+=1
 
-# Do not edit the following code      
+        cur = second_list.head
+        b = 1
+        while (cur.next):
+            cur = cur.next
+            b += 1
+
+
+
+        while(a<b):
+            first_list.insert_at_end(0)
+            a+=1
+        while(a>b):
+            second_list.insert_at_end(0)
+            b+=1
+        #print("\n\n\n\n\nfirst:", first_list.status(), "\n\n\n\n")
+        #print("\n\n\n\n\nsecond:", second_list.status(), "\n\n\n\n")
+
+        fcur=first_list.head
+        scur=second_list.head
+        ans=LinkedList()
+        prev=0
+        #print()
+        for k in range(a):
+            if prev == 1:
+                a = fcur.data + scur.data + 1
+                prev = 0
+                count = 0
+                if a >= 10:
+                    count = a - 10
+                    prev = 1
+                    ans.insert_at_end(count)
+                    #print(k," ",count,"/////")
+                    #ans.status()
+                    fcur = fcur.next
+                    scur = scur.next
+                else:
+                    ans.insert_at_end(a)
+                    #print(k, " ",a,"****")
+                    #ans.status()
+                    fcur = fcur.next
+                    scur = scur.next
+
+            else:
+                a = fcur.data + scur.data
+                count = 0
+                if a >= 10:
+                    count = a - 10
+                    prev = 1
+                    ans.insert_at_end(count)
+                    #print(count," &&&&&&&&&&&&&&&&&&&&&&&&&&&&&&")
+                    #print(k, " ", count,"----")
+                    #ans.status()
+                    fcur = fcur.next
+                    scur = scur.next
+
+                else:
+                    ans.insert_at_end(fcur.data + scur.data)
+                    #print(k, " ", fcur.data + scur.data,"+++++")
+                    #ans.status()
+                    fcur = fcur.next
+                    scur = scur.next
+        if(prev==1):
+            ans.insert_at_end(1)
+        #ans.status()
+        return ans
+
+
+
+
+
+
+
+
+# Do not edit the following code
 # Create an instance for LinkedList
 first_list = LinkedList()
 # Create an another instance for LinkedList
